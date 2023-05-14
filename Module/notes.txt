@@ -1,0 +1,29 @@
+By default node uses common js conventions , to use es6 style we have to specify type in 
+package.json
+
+ * this below code lets us to expose some code, which can be used in another file
+
+commonjs style export and import  -
+ module.exports = {   
+   some_name: funcname
+   some_name2: funcname2
+   }
+
+   let name = require('filename')
+ 
+ es6 style export -
+ export default name;
+ export {name1, name2};
+
+import name/{} from 'filename'
+
+
+ * module can be :
+ *      commonjs module(lets us use require) works by default- require('path')
+ *      es module(lets use import)
+ *             1) we can use .mjs extension
+ *             2) with .js file , we can use package.json with
+ * json object "type": "module", but in this case we use .cjs for commonjs(require)
+ 
+ * in node, package is a folder which contains package.json file in it
+
