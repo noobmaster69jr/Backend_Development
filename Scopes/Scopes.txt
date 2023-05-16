@@ -27,3 +27,13 @@ then it is automatically considered as global scope(this happens during executio
 Hoisting - is a direct consequence of lexical parsing that happens in js, due to which we are 
 able to access some functions & variable before declaring them. which gives us a notion that 
 they are moved up in the file
+
+The Function() constructor, function expression, and function declaration syntaxes 
+create full-fledged function objects, which can be constructed with new.
+However, arrow functions and methods cannot be constructed.
+
+ The function declaration creates functions that are hoisted.Other syntaxes do not hoist 
+ the function and the function value is only visible after the definition.
+
+ The arrow function and Function() constructor always create anonymous functions, 
+ which means they can't easily call themselves recursively
