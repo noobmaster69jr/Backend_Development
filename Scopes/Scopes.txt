@@ -1,0 +1,29 @@
+Js is not interpreted but hybrid (compiled + interpreted)
+
+Execution in js happens in 2 steps:
+    parsing phase - when we execute the js code,  first it parses the whole js code. In this phase
+            scopes are assigned for the variables or functions(we only assign scope but not values
+            for variable)
+    executin phase - once the above step is done, it executes
+
+Every variable in js is used in one of the following ways:
+    1) either it will be getting a value assigned i.e, used as target
+    2) or it will be used to retrieve a value i.e, it will be used as source
+
+In js outside everything global scope is maintained, when enters inside a function it maintains
+a seperate function scope
+
+whenever we declare a variable with let/const/var or initializing a variable 
+it is a formal declaration
+
+In parsing phase it looks for formal declaration
+
+when we searching for scope of variable if we don't find it we go one step outside the scope 
+and search
+
+Autoglobals - In js if we are searching for a scope of a variable and it is not found anywhere 
+then it is automatically considered as global scope(this happens during execution phase)
+
+Hoisting - is a direct consequence of lexical parsing that happens in js, due to which we are 
+able to access some functions & variable before declaring them. which gives us a notion that 
+they are moved up in the file
