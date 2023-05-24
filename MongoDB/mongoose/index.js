@@ -1,15 +1,53 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/db")    //usr - db name
-  .then((res) => console.log("connected to MongoDB"))
-  .catch(err=>console.log("error : ",err));
+mongoose.connect(
+  "mongodb://localhost:27017/db",
+  () => {
+    console.log("Connected To MongoDB");
+  },
+  (err) => {
+    console.log("Error :", err.message);
+  }
+);
 
-  let cars = mongoose.model("Cars",
-                mongoose.Schema({
-                    brand: String,
-                    model: String
-                }))
+let engineSchema = mongoose.Schema({ horsePower: Number, cc: Number });
 
-cars.create({"brand": "maruti", "model":"Swift"})
-            .then(data => console.log('Sucess'))
-            .catch(err => console.log("Error"))
+let carSchema = mongoose.Schema({
+  brand: String,
+  model: {
+    type: String,
+    validate: {
+      validator: (s) => s.length > 5,
+      message: (props) => `${props.value} model name is too short`,
+    },
+  },
+  engine: engineSchema,
+});
+
+var cars = mongoose.model("Cars", carSchema);
+
+cars
+  .create({
+    brand: "Maruti",
+    model: "Altoss",
+  })
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err));
+
+let id = mongoose.ObjectId("63a092b93c0de97a1da59c09");
+
+let update = cars.updateOne({ _id: id }, { brand: "Audi2", $inc: { __v: 1 } });
+
+update.then(console.log).catch(console.log);
+
+const search = async function (id) {
+  try {
+    const myCar = await cars.findOne({ _id: id });
+
+    console.log(myCar);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+search(id).then(() => console.log("found!!"));
